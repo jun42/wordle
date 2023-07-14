@@ -8,9 +8,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 20px;
+  margin-bottom: 10px;
   border-top: 1px solid #eef0f1;
   border-bottom: 1px solid #eef0f1;
-  font-family: "Ultra", serif;
+  font-family: "Nanum Myeongjo", serif;
 }
 
 .list-img {
@@ -20,7 +21,11 @@
 
 .title {
   font-size: 30px;
-  font-weight: 100;
+  font-weight: 900;
+  position: fixed;
+  left: 50%;
+  top: 8%;
+  transform: translate(-50%, -50%);
 }
 
 .icons {

@@ -2,3 +2,5 @@
 @import "reset.css";
 /* components */
 @import "header.css";
+@import "main.css";
+@import "footer.css";

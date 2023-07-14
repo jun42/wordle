@@ -1,0 +1,43 @@
+.keyboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.keyboard-cell {
+  width: 45px;
+  height: 60px;
+  background-color: #d3d6da;
+  border-radius: 4px;
+  margin: 3px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 20px 0;
+}
+
+#enter {
+  font-size: 11px;
+  width: 65px;
+  padding-top: 23px;
+}
+
+#backspace {
+  padding: 17px 0;
+  width: 65px;
+}
+
+#backspace img {
+  width: 25px;
+  height: 25px;
+}
