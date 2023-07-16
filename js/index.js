@@ -22,7 +22,28 @@ let index = 0;
 let attempts = 0;
 let correct = 0;
 
+const rgb2hex = (rgb) => {
+  if (rgb === "") return;
+
+  return `#${rgb
+    .match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/)
+    .slice(1)
+    .map((n) => parseInt(n, 10).toString(16).padStart(2, "0"))
+    .join("")}`.toUpperCase();
+};
+
 const appStart = function () {
+  const green = "#6AAA64";
+  const yellow = "#C9B458";
+  const grey = "#787c7e";
+  const changeKeyboardColor = function (letter, color) {
+    keyboardBlock = document.querySelector(`#${letter.toLowerCase()}`);
+    const currentColor = rgb2hex(keyboardBlock.style.background);
+    console.log(currentColor);
+    if (currentColor !== green) {
+      keyboardBlock.style.background = color;
+    }
+  };
   const handleBackspace = function () {
     if (index > 0) {
       index -= 1;
@@ -37,6 +58,7 @@ const appStart = function () {
       if (attempts === 5) gameOver();
       attempts += 1;
       index = 0;
+      correct = 0;
     };
     const gameOver = function () {
       window.removeEventListener("keydown", handleKeydown);
@@ -51,21 +73,25 @@ const appStart = function () {
       document.body.appendChild(div);
     };
     for (let i = 0; i < 5; i++) {
-      const block = document.querySelector(
+      const boardBlock = document.querySelector(
         `.board-cell[data-index='${attempts}${i}']`
       );
-      const letter = block.innerText;
+
+      const letter = boardBlock.innerText;
       const solutionChar = solution[i];
+      //green
       if (letter === solutionChar) {
-        block.style.background = "#6AAA64";
+        boardBlock.style.background = green;
+        changeKeyboardColor(letter, green);
         correct += 1;
       } else if (solution.includes(letter)) {
-        block.style.background = "#C9B458";
+        boardBlock.style.background = yellow;
+        changeKeyboardColor(letter, yellow);
       } else {
-        block.style.background = "#787c7e";
+        boardBlock.style.background = grey;
       }
-      block.style.color = "white";
-      block.style.border = "none";
+      boardBlock.style.color = "white";
+      boardBlock.style.border = "none";
     }
     if (correct === 5) gameOver();
     else nextLine();
