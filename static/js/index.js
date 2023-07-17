@@ -17,10 +17,10 @@ const stopTimer = () => clearInterval(startTimer);
 
 // startTimer(); clearInterval 함수형으로 어떻게?
 
-const solution = "apple".toUpperCase();
+// const solution = "apple".toUpperCase();
 let index = 0;
 let attempts = 0;
-let correct = 0;
+// let correct = 0;
 
 const rgb2hex = (rgb) => {
   if (rgb === "") return;
@@ -53,7 +53,11 @@ const appStart = function () {
       formerBlock.innerText = "";
     }
   };
-  const handleEnterkey = function () {
+  const handleEnterkey = async () => {
+    let correct = 0;
+    const response = await fetch("/answer");
+    const solutionObject = await response.json();
+    const solution = solutionObject.answer;
     const nextLine = function () {
       if (attempts === 5) gameOver();
       attempts += 1;
