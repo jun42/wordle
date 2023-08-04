@@ -39,7 +39,6 @@ const appStart = function () {
   const changeKeyboardColor = function (letter, color) {
     keyboardBlock = document.querySelector(`#${letter.toLowerCase()}`);
     const currentColor = rgb2hex(keyboardBlock.style.background);
-    console.log(currentColor);
     if (currentColor !== green) {
       keyboardBlock.style.background = color;
     }
@@ -54,7 +53,6 @@ const appStart = function () {
     }
   };
   const handleEnterkey = () => {
-    console.log("enter");
     let correct = 0;
     // const response = await fetch("/answer");
     // const solutionObject = await response.json();
@@ -99,8 +97,23 @@ const appStart = function () {
       boardBlock.style.color = "white";
       boardBlock.style.border = "none";
     }
-    if (correct === 5) gameOver();
-    else nextLine();
+    const boardRow = document.querySelector(
+      `.board-cell[data-index='${attempts}${index - 1}']`
+    ).parentElement;
+    console.log(boardRow);
+    const correctAnimation = () => {
+      boardRow.style.animation = "correctAnimation 0.6s";
+    };
+    const incorrectAnimation = () => {
+      boardRow.style.animation = "incorrectAnimation 0.6s";
+    };
+    if (correct === 5) {
+      correctAnimation();
+      setTimeout(gameOver, 1000);
+    } else {
+      incorrectAnimation();
+      nextLine();
+    }
   };
 
   const handleKeydown = function (event) {
@@ -152,7 +165,6 @@ const appStart = function () {
       "n",
       "m",
     ];
-    console.log(typeof key);
     // const keyCode = event.keyCode;
 
     thisBlock = document.querySelector(
@@ -166,7 +178,6 @@ const appStart = function () {
     } else if (keyArr.includes(key.toLowerCase())) {
       thisBlock.innerText = key;
       index += 1;
-      console.log("index:", index);
     }
   };
 
