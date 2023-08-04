@@ -52,12 +52,12 @@ const appStart = function () {
       formerBlock.innerText = "";
     }
   };
-  const handleEnterkey = () => {
+  const handleEnterkey = async () => {
     let correct = 0;
-    // const response = await fetch("/answer");
-    // const solutionObject = await response.json();
-    // const solution = solutionObject.answer;
-    const solution = "APPLE";
+    const response = await fetch("/answer");
+    const solutionObject = await response.json();
+    const solution = solutionObject.answer;
+
     const nextLine = function () {
       if (attempts === 5) gameOver();
       attempts += 1;
