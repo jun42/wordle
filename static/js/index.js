@@ -43,6 +43,7 @@ const appStart = function () {
       keyboardBlock.style.background = color;
     }
   };
+
   const handleBackspace = function () {
     if (index > 0) {
       index -= 1;
@@ -52,7 +53,8 @@ const appStart = function () {
       formerBlock.innerText = "";
     }
   };
-  const handleEnterkey = async () => {
+
+  const handleEnterkey = async function () {
     let correct = 0;
     const response = await fetch("/answer");
     const solutionObject = await response.json();
