@@ -53,11 +53,13 @@ const appStart = function () {
       formerBlock.innerText = "";
     }
   };
-  const handleEnterkey = async () => {
+  const handleEnterkey = () => {
+    console.log("enter");
     let correct = 0;
-    const response = await fetch("/answer");
-    const solutionObject = await response.json();
-    const solution = solutionObject.answer;
+    // const response = await fetch("/answer");
+    // const solutionObject = await response.json();
+    // const solution = solutionObject.answer;
+    const solution = "APPLE";
     const nextLine = function () {
       if (attempts === 5) gameOver();
       attempts += 1;
@@ -115,38 +117,61 @@ const appStart = function () {
       thisBlock.innerText = key;
       index += 1;
     }
-    // keyArr = [
-    //   "q",
-    //   "w",
-    //   "e",
-    //   "r",
-    //   "t",
-    //   "y",
-    //   "u",
-    //   "i",
-    //   "o",
-    //   "p",
-    //   "a",
-    //   "s",
-    //   "d",
-    //   "f",
-    //   "g",
-    //   "h",
-    //   "j",
-    //   "k",
-    //   "l",
-    //   "z",
-    //   "x",
-    //   "c",
-    //   "v",
-    //   "b",
-    //   "n",
-    //   "m",
-    // ];
     // keyArr.includes(key) ? (thisBlock.innerText = key.toUpperCase()) : true;
   };
 
   window.addEventListener("keydown", handleKeydown);
+
+  const handleKeyClick = function (event) {
+    const key = event.target.id.toUpperCase();
+    const keyArr = [
+      "q",
+      "w",
+      "e",
+      "r",
+      "t",
+      "y",
+      "u",
+      "i",
+      "o",
+      "p",
+      "a",
+      "s",
+      "d",
+      "f",
+      "g",
+      "h",
+      "j",
+      "k",
+      "l",
+      "z",
+      "x",
+      "c",
+      "v",
+      "b",
+      "n",
+      "m",
+    ];
+    console.log(typeof key);
+    // const keyCode = event.keyCode;
+
+    thisBlock = document.querySelector(
+      `.board-cell[data-index='${attempts}${index}']`
+    );
+    if (key === "BACKSPACE") handleBackspace();
+
+    if (index === 5) {
+      if (key === "ENTER") handleEnterkey();
+      else return;
+    } else if (keyArr.includes(key.toLowerCase())) {
+      thisBlock.innerText = key;
+      index += 1;
+      console.log("index:", index);
+    }
+  };
+
+  const keyboard = document.querySelector(".keyboard");
+  keyboard.addEventListener("click", handleKeyClick);
 };
 
 appStart();
